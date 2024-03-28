@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { nanoid } from "nanoid";
 import ViewTasks from "./ViewTasks";
-import ControllerDoneTasks from "./ControllerDoneTasks";
 import {Button} from "react-bootstrap";
 
 export function ControllerTasks() {
@@ -60,7 +59,7 @@ export function ControllerTasks() {
         let array = []
         for (let index = 0; index < json.length; index++) {
           array.push(json[index])
-          
+
         }
         setTaskList(array)
         setClickedButton(buttonName);

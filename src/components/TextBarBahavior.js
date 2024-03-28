@@ -4,7 +4,7 @@ import { Button, CardText, Col, Row, InputGroup, FormControl } from "react-boots
 export default function TextBarBehavior(props){
     const [taskToSave, setTaskToSave] = useState("")
     const [searchedTask, setSearchedTask] = useState("")
-    
+
 
 /*     function fetchAddTask(){
         fetch("http://localhost:8080/tasks/", {
@@ -25,11 +25,11 @@ export default function TextBarBehavior(props){
     return (
         <div>
           <Col xs={10} md={8} xl={6} className="d-flex align-items-stretch">
-          <input type="text" 
-                 className="form-control me-2" 
+          <input type="text"
+                 className="form-control me-2"
                  placeholder="Nouvelle tâche"
                  onClick={() => {console.log(props.taskList);}}/>
-          <Button {...props.addSearch == "add" ? variant="success" : variant="dark"}>
+            <Button variant={props.addSearch === 'add' ? 'success' : 'primary'}>
             {props.addSearch == "add" ? "Ajouter" : "Effacer"}
           </Button>
         </Col>
