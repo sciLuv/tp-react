@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Button, CardText, Col, Row, InputGroup, FormControl } from "react-bootstrap";
 import TextBarBehavior from "./TextBarBahavior";
 

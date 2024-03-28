@@ -6,7 +6,7 @@ export default function TextBarBehavior(props){
     const [searchedTask, setSearchedTask] = useState("")
     
 
-/*     function fetchAddTask(){
+    function fetchAddTask(){
         fetch("http://localhost:8080/tasks/", {
             method: "POST",
             headers: {
@@ -20,7 +20,15 @@ export default function TextBarBehavior(props){
             // Après la mise à jour, incrémentez le compteur pour déclencher une nouvelle récupération des tâches
             setUpdateCounter(prev => prev + 1);
           });
-    } */
+    }
+
+    function buttonBehavior(){
+      {props.addSearch === 'add' ? 
+      fetchAddTask()
+      : 
+      null
+      }
+    }
 
     return (
         <div>
@@ -29,7 +37,10 @@ export default function TextBarBehavior(props){
                  className="form-control me-2" 
                  placeholder="Nouvelle tâche"
                  onClick={() => {console.log(props.taskList);}}/>
-          <Button {...props.addSearch == "add" ? variant="success" : variant="dark"}>
+          <Button 
+          variant={props.addSearch === 'add' ? 'success' : 'primary'}
+          onClick={() => buttonBehavior()}
+          >
             {props.addSearch == "add" ? "Ajouter" : "Effacer"}
           </Button>
         </Col>
