@@ -11,7 +11,7 @@ export function ControllerTasks() {
   const [taskList, setTaskList] = useState([])
 
 
-
+// Supprimer une tâche
   function fetchDelete(id){
     console.log(taskList);
     fetch("http://localhost:8080/tasks/" + id, {
@@ -26,6 +26,8 @@ export function ControllerTasks() {
       setUpdateCounter(prev => prev + 1);
     });
   }
+
+  // Cocher une tâche terminée
   function fetchCheckTask(id, text, isChecked) {
     console.log(taskList);
     fetch("http://localhost:8080/tasks/" + id, {
@@ -49,6 +51,7 @@ export function ControllerTasks() {
       })
   }
 
+
   function fetchTasks(buttonName = clickedButton) {
     console.log(taskList);
     setClickedButton(buttonName)
@@ -59,13 +62,11 @@ export function ControllerTasks() {
         let array = []
         for (let index = 0; index < json.length; index++) {
           array.push(json[index])
-
         }
         setTaskList(array)
         setClickedButton(buttonName);
         const unCheckedTasksCount = json.filter(task => !task.isChecked).length;
         setRemainingTasks(unCheckedTasksCount);
-        // Afficher toutes les tâches
 
         if(buttonName === "Toutes" || buttonName === undefined) {
           console.log("je suis dans toutes")
@@ -153,7 +154,7 @@ export function ControllerTasks() {
    // Ajoutez updateCounter ici
   return (
     <div>
-      <ViewTasks onFetch={fetchTasks} tasks={tasks} taskList={taskList}  remainingTasks={remainingTasks}/>
+      <ViewTasks onFetch={fetchTasks} tasks={tasks} taskList={taskList}  remainingTasks={remainingTasks} updateCounter={updateCounter}/>
     </div>
   );
 }

@@ -4,9 +4,21 @@ import { Button, CardText, Col, Row, InputGroup, FormControl } from "react-boots
 export default function TextBarBehavior(props){
     const [taskToSave, setTaskToSave] = useState("")
     const [searchedTask, setSearchedTask] = useState("")
-    
+    const [inputValue, setInputValue] = useState('');
 
-    function fetchAddTask(){
+
+  const handleChange = (event) => {
+    setInputValue(event.target.value);
+    {props.addSearch == 'add' ?
+      null
+      :
+      searchTask(event.target.value)
+    }
+  };
+
+
+  // Ajouter une tâche
+    function fetchAddTask(text){
         fetch("http://localhost:8080/tasks/", {
             method: "POST",
             headers: {
@@ -18,32 +30,45 @@ export default function TextBarBehavior(props){
             }),
           }).then(() => {
             // Après la mise à jour, incrémentez le compteur pour déclencher une nouvelle récupération des tâches
-            setUpdateCounter(prev => prev + 1);
+          props.onFetch()
           });
     }
 
     function buttonBehavior(){
-      {props.addSearch === 'add' ? 
-      fetchAddTask()
-      : 
+      {props.addSearch == 'add' ?
+      fetchAddTask(inputValue)
+      :
       null
       }
     }
 
+    function searchBarBehavior(inputValue){
+
+    }
+
+  function searchTask(text){
+    const filteredTasks = props.taskList.filter(task => task.text.toLowerCase().includes(text.toLowerCase()));
+    console.log(filteredTasks); // Affiche les tâches filtrées dans la console
+  }
+
+
     return (
-        <div>
           <Col xs={10} md={8} xl={6} className="d-flex align-items-stretch">
-          <input type="text" 
-                 className="form-control me-2" 
+          <input type="text"
+                 className="form-control me-2"
                  placeholder="Nouvelle tâche"
-                 onClick={() => {console.log(props.taskList);}}/>
-          <Button 
+                 value={inputValue}
+                 onChange={handleChange}
+          />
+            <Button
           variant={props.addSearch === 'add' ? 'success' : 'primary'}
-          onClick={() => buttonBehavior()}
+          onClick={() => {
+            buttonBehavior(inputValue)
+            setInputValue("")
+          }}
           >
             {props.addSearch == "add" ? "Ajouter" : "Effacer"}
           </Button>
         </Col>
-        </div>
     )
 }

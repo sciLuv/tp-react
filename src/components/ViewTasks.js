@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Button, CardText, Col, Row, InputGroup, FormControl } from "react-bootstrap";
-import TextBarBehavior from "./TextBarBahavior";
+import TextBarBehavior from "./TextBarBehavior";
 
 export default function ViewTasks(props) {
 
@@ -37,7 +37,7 @@ export default function ViewTasks(props) {
         </Col>
       </Row>
       <Row className="justify-content-center mt-3">
-        <TextBarBehavior taskList={props.taskList}  addSearch={addSearch}></TextBarBehavior>
+        <TextBarBehavior taskList={props.taskList}  onFetch={props.onFetch} addSearch={addSearch} updateCounter={props.updateCounter}></TextBarBehavior>
       </Row>
     </div>
   );
